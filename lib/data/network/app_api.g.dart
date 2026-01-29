@@ -30,11 +30,11 @@ class _AppServiceClient implements AppServiceClient {
     final _options = _setStreamType<AuthenticationResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
-        _dio.options,
-        '/customers/login',
-        queryParameters: queryParameters,
-        data: _data,
-      )
+            _dio.options,
+            '/customers/login',
+            queryParameters: queryParameters,
+            data: _data,
+          )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
@@ -62,9 +62,7 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   String _combineBaseUrls(String dioBaseUrl, String? baseUrl) {
-    if (baseUrl == null || baseUrl
-        .trim()
-        .isEmpty) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
       return dioBaseUrl;
     }
 
