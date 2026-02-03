@@ -7,6 +7,8 @@ import 'package:services/data/network/requests.dart';
 import 'package:services/domain/model/models.dart';
 import 'package:services/domain/repository/repository.dart';
 
+import '../network/error_handler.dart';
+
 class RepositoryImpl implements Repository {
   final RemoteDataSource _remoteDataSource;
   final NetworkInfo _networkInfo;
@@ -18,14 +20,23 @@ class RepositoryImpl implements Repository {
     LoginRequest loginRequest,
   ) async {
     if (await _networkInfo.isConnected) {
-      final response = await _remoteDataSource.login(loginRequest);
-      if (response.status == 0) {
-        return Right(response.toDomain());
-      } else {
-        return Left(Failure(404, response.message ?? "business error message"));
+      try {
+        final response = await _remoteDataSource.login(loginRequest);
+        if (response.status == ApiInternalStatus.SUCCESS) {
+          return Right(response.toDomain());
+        } else {
+          return Left(
+            Failure(
+              ApiInternalStatus.FALIURE,
+              response.message ?? ResponseMessage.DEFAULT,
+            ),
+          );
+        }
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return Left(Failure(501,"please check your internet connection"));
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
 }
