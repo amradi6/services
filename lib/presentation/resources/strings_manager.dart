@@ -1,4 +1,4 @@
-class AppStrings{
+class AppStrings {
   static const String noRouteFound = "No Route Found";
 
   static const onBoardingTitle1 = "SEE THE BEST COURSE #1";
@@ -12,4 +12,11 @@ class AppStrings{
   static const onBoardingSubTitle4 = "Tut app is an awesome flutter application using clean architecture #4";
 
   static const skip = "Skip";
+  static const userName = "User Name";
+  static const password = "Password";
+  static const userNameError = "Please enter your User Name";
+  static const passwordError = "please enter your Password";
+  static const login = "Login";
+  static const forgetPassword = "Forget Password";
+  static const registerText = "Not a member? Sign Up";
 }
