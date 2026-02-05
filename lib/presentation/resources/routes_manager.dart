@@ -7,6 +7,7 @@ import 'package:services/presentation/register/register_view.dart';
 import 'package:services/presentation/splash/splash_view.dart';
 import 'package:services/presentation/store_details/store_details_view.dart';
 
+import '../../app/di.dart';
 import 'strings_manager.dart';
 
 class Routes {
@@ -33,6 +34,7 @@ class RoutersGenerator {
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => const OnboardingView(),);
       case Routes.loginRoute:
+        initLoginModule();
         return MaterialPageRoute(builder: (_) => const LoginView());
       case Routes.registerRoute:
         return MaterialPageRoute(builder: (_) => const RegisterView());
